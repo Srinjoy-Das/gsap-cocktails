@@ -1,6 +1,8 @@
 import { cocktailLists, mockTailLists } from "../../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { SplitText } from "gsap/all";
+
 
 const Cocktails = () => {
     useGSAP(() => {
@@ -14,13 +16,35 @@ const Cocktails = () => {
             }
         })
 
-
         parallaxTimeline.from('#c-left-leaf', {
             x: -100, y: 100,
         })
         .from('#c-right-leaf', {
-            x: 100,y: 100,
+            x: 100, y: 100,
         })
+
+        
+        const drinksTimeline = gsap.timeline({
+
+            scrollTrigger: {
+                trigger: '#cocktails',
+                start: 'top center',
+                end: 'center center',
+                scrub: true,
+            }
+        })
+
+        drinksTimeline
+        .from('#popularCocktails', {
+            x: -200,
+            opacity: 0,
+            duration: 1,
+        })
+        .from('#lovedMocktails', {
+            x: 200,
+            opacity: 0,
+            duration: 1,
+        }, "<")
     })
 
 
@@ -31,7 +55,7 @@ const Cocktails = () => {
 
 
             <div className="list">
-                <div className="popular">
+                <div className="popular" id="popularCocktails">
                     <h2>Most Popular Cocktails:</h2>
 
                     <ul>
@@ -51,14 +75,14 @@ const Cocktails = () => {
                 </div>
 
 
-                <div className="loved">
+                <div className="loved" id="lovedMocktails">
                     <h2>Most Loved Mocktails:</h2>
 
                     <ul>
                         {mockTailLists.map(({ name, country, detail, price }) => {
                             return (
                                 <li key={name}>
-                                    <div className="me-28">
+                                    <div className="md:me-28">
                                         <h3>{name}</h3>
                                         <p>{country} | {detail}</p>
                                     </div>
