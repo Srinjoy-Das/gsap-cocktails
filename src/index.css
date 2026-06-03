@@ -53,10 +53,19 @@ body {
 }
 
 @utility masked-img {
+    --mask-size: 50%; 
+    
+    -webkit-mask-image: url("/images/mask-img.png");
     mask-image: url("/images/mask-img.png");
+    
+    -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+    
+    -webkit-mask-position: center;
     mask-position: center;
-    mask-size: 50%;
+    
+    -webkit-mask-size: var(--mask-size);
+    mask-size: var(--mask-size);
 }
 
 @layer components {
@@ -241,7 +250,7 @@ body {
     }
 
     #art {
-        @apply flex-center flex-col min-h-dvh p-5 mt-20 relative radial-gradient;
+        @apply flex-center flex-col min-h-[115vh] p-5 pb-32 mt-20 relative radial-gradient;
 
         h2 {
             @apply relative md:text-[20vw] text-8xl text-nowrap leading-none font-modern-negra text-center text-[#505050] mb-8;
@@ -256,15 +265,16 @@ body {
         }
 
         .masked-container {
+            @apply z-10 w-full;
             h2 {
                 @apply text-4xl md:text-5xl font-modern-negra text-center mb-10 text-white mt-32;
             }
 
             div {
-                @apply opacity-0 md:px-0 px-5 space-y-5 absolute md:bottom-5 bottom-52 left-1/2 -translate-x-1/2;
+                @apply opacity-0 md:px-0 px-5 space-y-5 absolute md:bottom-10 bottom-5 left-1/2 -translate-x-1/2 w-full;
 
                 h3 {
-                    @apply md:text-5xl text-2xl text-center font-serif md:w-full w-80 text-white;
+                    @apply md:text-5xl text-2xl text-center font-serif md:w-full w-80 text-white mx-auto;
                 }
 
                 p {
